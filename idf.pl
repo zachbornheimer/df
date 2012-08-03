@@ -54,9 +54,14 @@ foreach (@files) {
     } else {
         $comment = $commentSymbols{def} . " ";
     }
-    my $version = `head -n 1 $_`; 
-    $version =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
-    chomp($version); 
+    my $version;
+    if (-e $_) {
+        $version = `head -n 1 $_`; 
+        $version =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
+        chomp($version);
+    } else {
+        $version = "0.0.0";
+    }
     my $v = `head -n 1 df/$_`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
@@ -76,7 +81,7 @@ foreach (@files) {
     my @versionarray = split /\./, $version;
     for (0..2) {
         my $i = 0;
-        if ($varray[$_] > $versionarray[$_]) {
+        if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
             use File::Copy;
             move('df/' . $file, $target . $file) or die $!; 
             print "Installed " . $file . "\n";
