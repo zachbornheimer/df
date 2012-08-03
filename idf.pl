@@ -30,7 +30,7 @@ foreach (@files) {
     chomp($v); 
     $v =~ s/\.//g;
     $version =~ s/\.//g;
-    if ($v > $version) {
+    if ($v eq "" || $v > $version) {
         use File::Copy;
         move('df/' . $file, $target . $_) or die $!; 
         print "Installed " . $file . "\n";
