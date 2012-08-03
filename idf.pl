@@ -18,24 +18,73 @@ foreach (<.*>) {
     }
 }
 
+my $log = `git log`;
+my @log = split /\n/, $log;
+my $gitV = 0;
+foreach (@log) {
+    if ($_ =~ /^commit\s+/) {
+        $gitV++;
+    }
+}
+{
+    use integer;
+    my $d1 = 0;
+    my $d2 = 0;
+    my $d3 = $gitV;
+    $d1 = $gitV / 100;
+    $gitV -= $d1 * 100;
+    $d2 = $gitV / 10;
+    $gitV -= $d2 * 10;
+    $gitV = $d1 . "." . $d2 . "." . $gitV;
+}
+
 chdir($target);
+
+my %commentSymbols = ();
+$commentSymbols{vimrc} = '"';
+$commentSymbols{def} = '#';
 
 foreach (@files) {
     my $file = $_;
+    my $fileNoDot = $file;
+    $fileNoDot =~ s/^.//;
+    my $comment;
+    if ($commentSymbols{$fileNoDot}) {
+        $comment = $commentSymbols{$fileNoDot} . " ";
+    } else {
+        $comment = $commentSymbols{def} . " ";
+    }
     my $version = `head -n 1 $_`; 
     $version =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($version); 
     my $v = `head -n 1 df/$_`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
-    $v =~ s/\.//g;
-    $version =~ s/\.//g;
-    if ($v eq "" || $v > $version) {
-        use File::Copy;
-        move('df/' . $file, $target . $_) or die $!; 
-        print "Installed " . $file . "\n";
-    } else {
-        print "Existing file is newer.\n";
+    if ($v eq "") {
+        open (F, "df/".$file); 
+        my @f = <F>;
+        close (F);
+        open (F, ">df/".$file);
+        print F $comment . $gitV . "\n";
+        print F join("", @f);
+        close(F);
+        $v = `head -n 1 df/$file`; 
+        $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
+        chomp($v); 
     }
-    
+    my @varray = split /\./, $v;
+    my @versionarray = split /\./, $version;
+    for (0..2) {
+        my $i = 0;
+        if ($varray[$_] > $versionarray[$_]) {
+            use File::Copy;
+            move('df/' . $file, $target . $file) or die $!; 
+            print "Installed " . $file . "\n";
+            $i = 1;
+            last;
+        }
+        if (($_ == 2) && (!$i)) {
+            print "The existing '$file' is not a candidate for replacement.\n"
+        }
+    }
 }
