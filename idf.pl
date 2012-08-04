@@ -9,6 +9,12 @@ use strict;
 use warnings;
 require File::Copy;
 
+{ # reset git and pull the latest.
+    system("git reset --hard");
+    system("git pull");
+}
+
+
 my $target = "$ENV{HOME}/";
 
 my @files = ();
