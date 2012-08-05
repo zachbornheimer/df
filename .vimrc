@@ -5,3 +5,4 @@ set smartindent
 syntax on
 set vb t_vb=
 set number
+set novisualbell
