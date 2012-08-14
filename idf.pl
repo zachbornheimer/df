@@ -14,8 +14,24 @@ if ($#ARGV > 0) {
     if ($ARGV[0] eq "store") {
         shift(@ARGV);
         foreach (@ARGV) {
-            print "~/$_";
-            system("cp ~/$_ ~/df");
+            my $file = $_;
+            print "~/$file";
+            system("cp ~/$file ~/df");
+            open(F, $file);
+my @removeVersionNumber = ();           
+            my $i = 0;
+            while(<F>) {
+                chomp($_);
+                if ($i == 0) {
+                    if (!($_ =~ /^" \d+\.\d+\.\d+/)) {
+                        push (@removeVersionNumber, $_);
+                    }
+                }
+            }
+            close (F);
+            open (F, ">" . $file);
+            print F join("\n", @removeVersionNumber);
+            close(F);
             system("git add .; git commit -a");
         }
     } else {
