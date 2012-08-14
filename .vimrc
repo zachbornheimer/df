@@ -3,6 +3,6 @@ set tabstop=4
 set shiftwidth=4
 set smartindent
 syntax on
-set vb t_vb=
 set number
-set novisualbell
+set noeb vb t_vb=
+au GUIEnter * set vb t_vb=

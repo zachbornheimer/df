@@ -9,6 +9,20 @@ use strict;
 use warnings;
 require File::Copy;
 
+
+if ($#ARGV > 0) {
+    if ($ARGV[0] eq "store") {
+        shift(@ARGV);
+        foreach (@ARGV) {
+            print "~/$_";
+            system("cp ~/$_ ~/df");
+            system("git add .; git commit -a");
+        }
+    } else {
+        print @ARGV. "akldfj";
+    }
+    exit;
+}
 { # reset git and pull the latest.
     system("git reset --hard");
     system("git pull");
