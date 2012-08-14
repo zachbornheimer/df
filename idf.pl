@@ -18,7 +18,7 @@ if ($#ARGV > 0) {
             print "~/$file";
             system("cp ~/$file ~/df");
             open(F, $file);
-my @removeVersionNumber = ();           
+            my @removeVersionNumber = ();           
             my $i = 0;
             while(<F>) {
                 chomp($_);
@@ -34,8 +34,6 @@ my @removeVersionNumber = ();
             close(F);
             system("git add .; git commit -a");
         }
-    } else {
-        print @ARGV. "akldfj";
     }
     exit;
 }
