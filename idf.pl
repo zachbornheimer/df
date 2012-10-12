@@ -7,6 +7,7 @@
 
 use strict;
 use warnings;
+require integer;
 require File::Copy;
 
 
