@@ -8,3 +8,5 @@ set noeb vb t_vb=
 au GUIEnter * set vb t_vb=
 set backspace=2
 colorscheme darkblue
+filetype plugin indent on
+syntax enable
