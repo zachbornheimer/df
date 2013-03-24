@@ -10,3 +10,4 @@ set backspace=2
 colorscheme darkblue
 filetype plugin indent on
 syntax enable
+set nomore
