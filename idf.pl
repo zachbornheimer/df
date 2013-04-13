@@ -10,6 +10,12 @@ use warnings;
 require integer;
 require File::Copy;
 
+my %target;
+$target{'rc.lua'} = $ENV{HOME} . '.config/awesome';
+
+foreach (keys %target) {
+    system("mkdir -p " . $target{$_});
+}
 
 if ($#ARGV > 0) {
     if ($ARGV[0] eq "store") {
@@ -76,13 +82,14 @@ foreach (@log) {
 chdir($target);
 
 my %commentSymbols = ();
-$commentSymbols{vimrc} = '"';
-$commentSymbols{def} = '#';
+$commentSymbols{'vimrc'} = '"';
+$commentSymbols{'def'} = '#';
+$commendSymbols{'rc.lua'} = '--';
 
 foreach (@files) {
     my $file = $_;
     my $fileNoDot = $file;
-    $fileNoDot =~ s/^.//;
+    $fileNoDot =~ s/^\.//;
     my $comment;
     if ($commentSymbols{$fileNoDot}) {
         $comment = $commentSymbols{$fileNoDot} . " ";
@@ -118,7 +125,10 @@ foreach (@files) {
         my $i = 0;
         if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
             use File::Copy;
-            move('df/' . $file, $target . $file) or die $!; 
+            if (!$target{$file}) {
+                $target{$file} = $ENV{HOME};
+            }
+            move('df/' . $file, $target{$file} . $file) or die $!; 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
