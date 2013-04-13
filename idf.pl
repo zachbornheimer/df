@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# Copyright (C) 2013 Zachary Bornheimer
+#
 # idf.pl
 # Install Dot Files
 # Will check the first lines of dot files for a version number
@@ -24,13 +26,14 @@ if ($#ARGV > 0) {
             my $file = $_;
             print "~/$file";
             system("cp ~/$file ~/df");
+            $file =~ s/.*\///;
             open(F, $file);
             my @removeVersionNumber = ();           
             my $i = 0;
             while(<F>) {
                 chomp($_);
                 if ($i == 0) {
-                    if (!($_ =~ /^" \d+\.\d+\.\d+/)) {
+                    if (!($_ =~ /^(--|") \d+\.\d+\.\d+/)) {
                         push (@removeVersionNumber, $_);
                     }
                 }
@@ -44,6 +47,7 @@ if ($#ARGV > 0) {
     }
     exit;
 }
+
 { # reset git and pull the latest.
     system("git reset --hard");
     system("git pull");
