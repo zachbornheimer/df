@@ -84,7 +84,7 @@ chdir($target);
 my %commentSymbols = ();
 $commentSymbols{'vimrc'} = '"';
 $commentSymbols{'def'} = '#';
-$commendSymbols{'rc.lua'} = '--';
+$commentSymbols{'rc.lua'} = '--';
 
 foreach (@files) {
     my $file = $_;
