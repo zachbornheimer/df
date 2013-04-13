@@ -59,6 +59,8 @@ foreach (<.*>) {
     }
 }
 
+push @files, 'rc.lua';
+
 my $log = `git log`;
 my @log = split /\n/, $log;
 my $gitV = 0;
