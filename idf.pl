@@ -128,7 +128,7 @@ foreach (@files) {
         if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
             use File::Copy;
             if (!$target{$file}) {
-                $target{$file} = $ENV{HOME};
+                $target{$file} = $ENV{HOME}.'/';
             }
             move('df/' . $file, $target{$file} . $file) or die $!; 
             print "Installed " . $file . "\n";
