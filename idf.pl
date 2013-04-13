@@ -11,7 +11,7 @@ require integer;
 require File::Copy;
 
 my %target;
-$target{'rc.lua'} = $ENV{HOME} . '.config/awesome';
+$target{'rc.lua'} = $ENV{HOME} . '/.config/awesome';
 
 foreach (keys %target) {
     system("mkdir -p " . $target{$_});
