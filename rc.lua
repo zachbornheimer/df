@@ -356,7 +356,7 @@ awful.rules.rules = {
     -- Set Firefox to always map on tags number 2 of screen 1.
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][2] } },
-    { rule = { instance = "terminator" },
+    { rule = { instance = "xterm" },
       properties = { tag = tags[1][2] } },
 }
 -- }}}
@@ -451,4 +451,4 @@ function run_once(prg,arg_string,pname,screen)
 end
 
 run_once("firefox",nil,nil,2)
-run_once("terminator",nil,nil,2)
+run_once("xterm",nil,nil,2)
