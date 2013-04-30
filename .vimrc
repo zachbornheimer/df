@@ -11,3 +11,4 @@ colorscheme darkblue
 filetype plugin indent on
 syntax enable
 set nomore
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
