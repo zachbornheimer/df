@@ -12,6 +12,23 @@ use warnings;
 require integer;
 require File::Copy;
 
+=pod
+
+=head1 NAME
+
+idf.pl
+by Z. Bornheimer
+
+=head1 USAGE
+
+perl idf.pl
+
+===========
+
+perl idf.pl store <file relative to ~/>
+
+=cut
+
 my %target;
 $target{'rc.lua'} = $ENV{HOME} . '/.config/awesome/';
 
