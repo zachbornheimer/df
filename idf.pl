@@ -75,13 +75,11 @@ if ($#ARGV > 0) {
 my $target = "$ENV{HOME}/";
 
 my @files = ();
-foreach (<.*>) {
-    if (!($_ =~ /\.git/) && !($_ =~ /\.swp$/) && ($_ ne '.') && ($_ ne '..')) {
+foreach (<>) {
+    if (!(($_ ne 'idf.pl') && $_ =~ /\.git/) && !($_ =~ /\.swp$/) && ($_ ne '.') && ($_ ne '..')) {
         push @files, $_;
     }
 }
-
-push @files, 'rc.lua';
 
 my $log = `git log`;
 my @log = split /\n/, $log;
