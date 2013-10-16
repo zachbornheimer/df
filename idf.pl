@@ -31,7 +31,7 @@ perl idf.pl store <file relative to ~/>
 
 my %target;
 $target{'rc.lua'} = $ENV{HOME} . '/.config/awesome/';
-$target{'github.vim'} = $ENV{HOME} . '/.vim/colors/';
+$target{'.vim'} = $ENV{HOME} . '/.vim/colors/';
 
 foreach (keys %target) {
     system("mkdir -p " . $target{$_});
@@ -110,14 +110,16 @@ chdir($target);
 
 my %commentSymbols = ();
 $commentSymbols{'vimrc'} = '"';
-$commentSymbols{'github.vim'} = '"';
+$commentSymbols{'vim'} = '"';
 $commentSymbols{'def'} = '#';
-$commentSymbols{'rc.lua'} = '--';
+$commentSymbols{'lua'} = '--';
 
 foreach (@files) {
     my $file = $_;
     my $fileNoDot = $file;
-    $fileNoDot =~ s/^\.//;
+    $fileNoDot =~ /\.(.*)$/;
+    $fileNoDot = $1;
+
     my $comment;
     if ($commentSymbols{$fileNoDot}) {
         $comment = $commentSymbols{$fileNoDot} . " ";
