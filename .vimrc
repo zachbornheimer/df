@@ -6,6 +6,7 @@ set shiftwidth=4
 autocmd BufRead,BufNewFile *.c,*.h set noic cin noet
 autocmd BufRead,BufNewFile *.c,*.h set noic cin tabstop=8
 autocmd BufRead,BufNewFile *.c,*.h set noic cin shiftwidth=8
+
 set smartindent
 syntax on
 set number
@@ -15,3 +16,9 @@ set backspace=2
 colorscheme github
 filetype plugin indent on
 syntax enable
+
+if strftime("%H") < 8 || strftime("%H") > 22
+    colorscheme Tomorrow-Night
+else
+    colorscheme Tomorrow-Night-Bright
+endif
