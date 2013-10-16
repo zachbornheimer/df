@@ -110,6 +110,7 @@ chdir($target);
 
 my %commentSymbols = ();
 $commentSymbols{'vimrc'} = '"';
+$commentSymbols{'github.vim'} = '"';
 $commentSymbols{'def'} = '#';
 $commentSymbols{'rc.lua'} = '--';
 
