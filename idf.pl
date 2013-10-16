@@ -31,7 +31,12 @@ perl idf.pl store <file relative to ~/>
 
 my %target;
 $target{'rc.lua'} = $ENV{HOME} . '/.config/awesome/';
-$target{'.vim'} = $ENV{HOME} . '/.vim/colors/';
+
+my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim github.vim /;
+
+foreach (@vimFiles) {
+    $target{$_} = $ENV{HOME} . '/.vim/colors/';
+}
 
 foreach (keys %target) {
     system("mkdir -p " . $target{$_});
