@@ -75,8 +75,13 @@ if ($#ARGV > 0) {
 my $target = "$ENV{HOME}/";
 
 my @files = ();
-foreach (<>) {
-    if (!(($_ ne 'idf.pl') && $_ =~ /\.git/) && !($_ =~ /\.swp$/) && ($_ ne '.') && ($_ ne '..')) {
+foreach (<.*>) {
+    if (!($_ =~ /\.git/) && !($_ =~ /\.swp$/) && ($_ ne '.') && ($_ ne '..')) {
+        push @files, $_;
+    }
+}
+foreach (<*>) {
+    if (!($_ =~ /\.pl$/)) {
         push @files, $_;
     }
 }
