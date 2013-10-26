@@ -160,7 +160,7 @@ foreach (@files) {
             if (!$target{$ext}) {
                 $target{$ext} = $ENV{HOME}.'/';
             }
-            move($file, $target{$file} . $file) or die $!; 
+            move($file, $target{$ext} . $file) or die $!; 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
