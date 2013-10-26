@@ -138,7 +138,7 @@ foreach (@files) {
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
     if ($v eq "") {
-        open (F, "".$file); 
+        open (F, $file); 
         my @f = <F>;
         close (F);
         open (F, ">".$file);
