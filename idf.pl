@@ -154,9 +154,11 @@ foreach (@files) {
     for (0..2) {
         my $i = 0;
         if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
+        $file =~ m/(\..+)$/;
+        my $ext = $1;
             use File::Copy;
-            if (!$target{$file}) {
-                $target{$file} = $ENV{HOME}.'/';
+            if (!$target{$ext}) {
+                $target{$ext} = $ENV{HOME}.'/';
             }
             move('df/' . $file, $target{$file} . $file) or die $!; 
             print "Installed " . $file . "\n";
