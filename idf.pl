@@ -12,8 +12,31 @@ use warnings;
 require integer;
 require File::Copy;
 
+=pod
+
+=head1 NAME
+
+idf.pl
+by Z. Bornheimer
+
+=head1 USAGE
+
+perl idf.pl
+
+===========
+
+perl idf.pl store <file relative to ~/>
+
+=cut
+
 my %target;
 $target{'rc.lua'} = $ENV{HOME} . '/.config/awesome/';
+
+my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
+
+foreach (@vimFiles) {
+    $target{$_} = $ENV{HOME} . '/.vim/colors/';
+}
 
 foreach (keys %target) {
     system("mkdir -p " . $target{$_});
@@ -62,8 +85,11 @@ foreach (<.*>) {
         push @files, $_;
     }
 }
-
-push @files, 'rc.lua';
+foreach (<*>) {
+    if (!($_ =~ /\.pl$/)) {
+        push @files, $_;
+    }
+}
 
 my $log = `git log`;
 my @log = split /\n/, $log;
@@ -89,13 +115,16 @@ chdir($target);
 
 my %commentSymbols = ();
 $commentSymbols{'vimrc'} = '"';
+$commentSymbols{'vim'} = '"';
 $commentSymbols{'def'} = '#';
-$commentSymbols{'rc.lua'} = '--';
+$commentSymbols{'lua'} = '--';
 
 foreach (@files) {
     my $file = $_;
     my $fileNoDot = $file;
-    $fileNoDot =~ s/^\.//;
+    $fileNoDot =~ /\.(.*)$/;
+    $fileNoDot = $1;
+
     my $comment;
     if ($commentSymbols{$fileNoDot}) {
         $comment = $commentSymbols{$fileNoDot} . " ";
@@ -110,18 +139,18 @@ foreach (@files) {
     } else {
         $version = "0.0.0";
     }
-    my $v = `head -n 1 df/$_`;
+    my $v = `head -n 1 $_`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
     if ($v eq "") {
-        open (F, "df/".$file); 
+        open (F, $file); 
         my @f = <F>;
         close (F);
-        open (F, ">df/".$file);
+        open (F, ">".$file);
         print F $comment . $gitV . "\n";
         print F join("", @f);
         close(F);
-        $v = `head -n 1 df/$file`; 
+        $v = `head -n 1 $file`; 
         $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($v); 
     }
@@ -130,11 +159,13 @@ foreach (@files) {
     for (0..2) {
         my $i = 0;
         if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
+        $file =~ m/(\..+)$/;
+        my $ext = $1;
             use File::Copy;
-            if (!$target{$file}) {
-                $target{$file} = $ENV{HOME}.'/';
+            if (!$target{$ext}) {
+                $target{$ext} = $ENV{HOME}.'/';
             }
-            move('df/' . $file, $target{$file} . $file) or die $!; 
+            move($file, $target{$ext} . $file) or die $!; 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
