@@ -139,18 +139,18 @@ foreach (@files) {
     } else {
         $version = "0.0.0";
     }
-    my $v = `head -n 1 df/$_`;
+    my $v = `head -n 1 $_`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
     if ($v eq "") {
-        open (F, "df/".$file); 
+        open (F, $file); 
         my @f = <F>;
         close (F);
-        open (F, ">df/".$file);
+        open (F, ">".$file);
         print F $comment . $gitV . "\n";
         print F join("", @f);
         close(F);
-        $v = `head -n 1 df/$file`; 
+        $v = `head -n 1 $file`; 
         $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($v); 
     }
@@ -159,11 +159,13 @@ foreach (@files) {
     for (0..2) {
         my $i = 0;
         if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
+        $file =~ m/(\..+)$/;
+        my $ext = $1;
             use File::Copy;
-            if (!$target{$file}) {
-                $target{$file} = $ENV{HOME}.'/';
+            if (!$target{$ext}) {
+                $target{$ext} = $ENV{HOME}.'/';
             }
-            move('df/' . $file, $target{$file} . $file) or die $!; 
+            move($file, $target{$ext} . $file) or die $!; 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
