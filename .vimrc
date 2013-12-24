@@ -16,6 +16,7 @@ set backspace=2
 colorscheme Tomorrow-Night-Bright
 filetype plugin indent on
 syntax enable
+set autowriteall
 
 if strftime("%H") < 8 || strftime("%H") > 22
     colorscheme Tomorrow-Night
