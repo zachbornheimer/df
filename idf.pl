@@ -30,7 +30,7 @@ perl idf.pl store <file relative to ~/>
 =cut
 
 my %target;
-$target{'lua'} = $ENV{HOME} . '/.config/awesome/';
+$target{'.lua'} = $ENV{HOME} . '/.config/awesome/';
 $target{'.vim'} = $ENV{HOME} . '/.vim/colors/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
