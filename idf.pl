@@ -30,7 +30,8 @@ perl idf.pl store <file relative to ~/>
 =cut
 
 my %target;
-$target{'rc.lua'} = $ENV{HOME} . '/.config/awesome/';
+$target{'lua'} = $ENV{HOME} . '/.config/awesome/';
+$target{'.vim'} = $ENV{HOME} . '/.vim/colors/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
 
@@ -133,24 +134,24 @@ foreach (@files) {
     }
     my $version;
     if (-e $_) {
-        $version = `head -n 1 $_`; 
+        $version = `head -n 1 $ENV{PWD}/$_`; 
         $version =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($version);
     } else {
         $version = "0.0.0";
     }
-    my $v = `head -n 1 $_`;
+    my $v = `head -n 1 $ENV{PWD}/$_`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
     if ($v eq "") {
-        open (F, $file); 
+        open (F, $ENV{PWD} . '/' . $file); 
         my @f = <F>;
         close (F);
         open (F, ">".$file);
         print F $comment . $gitV . "\n";
         print F join("", @f);
         close(F);
-        $v = `head -n 1 $file`; 
+        $v = `head -n 1 $ENV{PWD}/$file`; 
         $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($v); 
     }
