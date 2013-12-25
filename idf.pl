@@ -133,13 +133,13 @@ foreach (@files) {
     }
     my $version;
     if (-e $_) {
-        $version = `head -n 1 $_`; 
+        $version = `head -n 1 $ENV{PWD}/$_`; 
         $version =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($version);
     } else {
         $version = "0.0.0";
     }
-    my $v = `head -n 1 $_`;
+    my $v = `head -n 1 $ENV{PWD}/$_`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
     if ($v eq "") {
@@ -150,7 +150,7 @@ foreach (@files) {
         print F $comment . $gitV . "\n";
         print F join("", @f);
         close(F);
-        $v = `head -n 1 $file`; 
+        $v = `head -n 1 $ENV{PWD}/$file`; 
         $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($v); 
     }
