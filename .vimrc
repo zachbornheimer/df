@@ -17,6 +17,10 @@ colorscheme Tomorrow-Night-Bright
 filetype plugin indent on
 syntax enable
 set autowriteall
+nnoremap ; :
+nnoremap : ;
+nnoremap zz ZZ
+nnoremap ZZ zz
 
 if strftime("%H") < 8 || strftime("%H") > 22
     colorscheme Tomorrow-Night
