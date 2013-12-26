@@ -74,7 +74,7 @@ if ($#ARGV > 0) {
 
 { # reset git and pull the latest.
     system("git reset --hard");
-    system("git pull");
+    system("git pull origin master");
 }
 
 
