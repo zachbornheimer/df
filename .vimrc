@@ -19,6 +19,8 @@ syntax enable
 set autowriteall
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 nnoremap zz ZZ
 nnoremap ZZ zz
 
