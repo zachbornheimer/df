@@ -16,7 +16,6 @@ set backspace=2
 colorscheme Tomorrow-Night-Bright
 filetype plugin indent on
 syntax enable
-set autowriteall
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
