@@ -2,6 +2,7 @@
 set et
 set tabstop=4
 set shiftwidth=4
+set t_Co=256
 
 autocmd BufRead,BufNewFile *.c,*.h set noic cin noet
 autocmd BufRead,BufNewFile *.c,*.h set noic cin tabstop=8
