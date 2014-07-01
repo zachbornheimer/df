@@ -10,7 +10,7 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 setopt correctall
 
 # Prompt
-export PS1="%n %d %#> "
+export PS1="%n %d > "
 
 # history
 export HISTSIZE=2000
