@@ -32,6 +32,7 @@ perl idf.pl store <file relative to ~/>
 my %target;
 $target{'.lua'} = $ENV{HOME} . '/.config/awesome/';
 $target{'.vim'} = $ENV{HOME} . '/.vim/colors/';
+$target{'.zsh_conf'} = $ENV{HOME} . '/.zkbd/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
 
