@@ -16,16 +16,26 @@ require File::Copy;
 
 =head1 NAME
 
-idf.pl
+idf.pl (Install Dot Files)
 by Z. Bornheimer
+
+=head1 PERL MODULES
+
+idf.pl requires "integer" and "File::Copy"
+
+=head1 SOFTWARE REQUIREMENTS
+
+idf.pl requires perl (obviously) and git.
 
 =head1 USAGE
 
 perl idf.pl
+(This method installs files)
 
 ===========
 
 perl idf.pl store <file relative to ~/>
+(This method stores files and commits them to the git repo).
 
 =cut
 
