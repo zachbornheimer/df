@@ -29,3 +29,6 @@ if strftime("%H") < 8 || strftime("%H") > 22
 else
     colorscheme Tomorrow-Night-Bright
 endif
+
+" w = save, w! = force-save, w!! = force sudo save
+cmap w!! w !sudo tee > /dev/null %
