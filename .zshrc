@@ -6,7 +6,7 @@ eval `ssh-agent` >/dev/null
 ls -d ~/.ssh/* | grep .pub | sed 's|\.pub$||' | xargs -i{} ssh-add {} 2>/dev/null 
 
 # path
-export PATH=$PATH:/usr/sbin/
+export PATH=$PATH:/usr/sbin/:/sbin/
 
 # completion
 autoload -U compinit
