@@ -174,10 +174,10 @@ foreach (@files) {
         $file =~ m/(\..+)$/;
         my $ext = $1;
             use File::Copy;
-            if (!$target{$ext}) {
+            if (!$target{$ext} || $target{$ext} eq ".") {
                 $target{$ext} = $ENV{HOME}.'/';
             }
-            move($file, $target{$ext} . $file) or die $!; 
+            move("$ENV{PWD}/$file", $target{$ext} . $file) or die "$ENV{PWD} $file, $target{$ext} $file $!"; 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
