@@ -39,15 +39,17 @@ perl idf.pl store <file relative to ~/>
 
 =cut
 
+my $home = `echo \$HOME`;
+
 my %target;
-$target{'.lua'} = $ENV{HOME} . '/.config/awesome/';
-$target{'.vim'} = $ENV{HOME} . '/.vim/colors/';
-$target{'.zsh_conf'} = $ENV{HOME} . '/.zkbd/';
+$target{'.lua'} = $home . '/.config/awesome/';
+$target{'.vim'} = $home . '/.vim/colors/';
+$target{'.zsh_conf'} = $home . '/.zkbd/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
 
 foreach (@vimFiles) {
-    $target{$_} = $ENV{HOME} . '/.vim/colors/';
+    $target{$_} = $home . '/.vim/colors/';
 }
 
 foreach (keys %target) {
@@ -89,7 +91,7 @@ if ($#ARGV > 0) {
 }
 
 
-my $target = "$ENV{HOME}/";
+my $target = "$home/";
 
 my @files = ();
 foreach (<.*>) {
@@ -175,7 +177,7 @@ foreach (@files) {
         my $ext = $1;
             use File::Copy;
             if (!$target{$ext} || $target{$ext} eq ".") {
-                $target{$ext} = $ENV{HOME}.'/';
+                $target{$ext} = $home.'/';
             }
             move("$ENV{PWD}/$file", $target{$ext} . $file) or die "$ENV{PWD} $file, $target{$ext} $file $!"; 
             print "Installed " . $file . "\n";
