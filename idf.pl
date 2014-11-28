@@ -40,6 +40,9 @@ perl idf.pl store <file relative to ~/>
 =cut
 
 my $home = `echo \$HOME`;
+my $pwd = `echo \$(pwd)`;
+chomp($home);
+chomp($pwd);
 
 my %target;
 $target{'.lua'} = $home . '/.config/awesome/';
@@ -146,25 +149,26 @@ foreach (@files) {
         $comment = $commentSymbols{def} . " ";
     }
     my $version;
+    my $filepath = $pwd . "/" . $_;
     if (-e $_) {
-        $version = `head -n 1 $ENV{PWD}/$_`; 
+        $version = `head -n 1 $filepath`; 
         $version =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($version);
     } else {
         $version = "0.0.0";
     }
-    my $v = `head -n 1 $ENV{PWD}/$_`;
+    my $v = `head -n 1 $filepath`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
     chomp($v); 
     if ($v eq "") {
-        open (F, $ENV{PWD} . '/' . $file); 
+        open (F, $pwd . '/' . $file); 
         my @f = <F>;
         close (F);
         open (F, ">".$file);
         print F $comment . $gitV . "\n";
         print F join("", @f);
         close(F);
-        $v = `head -n 1 $ENV{PWD}/$file`; 
+        $v = `head -n 1 $pwd/$file`; 
         $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
         chomp($v); 
     }
@@ -179,7 +183,7 @@ foreach (@files) {
             if (!$target{$ext} || $target{$ext} eq ".") {
                 $target{$ext} = $home.'/';
             }
-            move("$ENV{PWD}/$file", $target{$ext} . $file) or die "$ENV{PWD} $file, $target{$ext} $file $!"; 
+            move("$pwd/$file", $target{$ext} . $file) or die "$pwd $file, $target{$ext} $file $!"; 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
