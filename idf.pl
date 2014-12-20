@@ -10,7 +10,7 @@
 use strict;
 use warnings;
 require integer;
-require File::Copy;
+use Cwd qw(abs_path); # for $pwd
 
 =pod
 
@@ -42,7 +42,8 @@ perl idf.pl store <file relative to ~/>
 # $home = user's home dir
 # $pwd = scripts directory (directory of all the dot files)
 my $home = `sh -c "echo ~\$(whoami)"`;
-my $pwd = `echo \$(pwd)`;
+my $pwd = abs_path(__FILE__);
+$pwd =~ s|(.*)/.*|$1|;
 chomp($home);
 chomp($pwd);
 
@@ -184,7 +185,7 @@ foreach (@files) {
             if (!$target{$ext} || $target{$ext} eq ".") {
                 $target{$ext} = $home.'/';
             }
-            #system("mv $pwd/$file $target{$ext}$file"); 
+            system("mv $pwd/$file $target{$ext}$file"); 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
