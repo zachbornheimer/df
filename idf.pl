@@ -39,6 +39,8 @@ perl idf.pl store <file relative to ~/>
 
 =cut
 
+# $home = user's home dir
+# $pwd = scripts directory (directory of all the dot files)
 my $home = `sh -c "echo ~\$(whoami)"`;
 my $pwd = `echo \$(pwd)`;
 chomp($home);
@@ -179,11 +181,10 @@ foreach (@files) {
         if (!$versionarray[$_] || $versionarray[$_] == "" || $varray[$_] > $versionarray[$_]) {
         $file =~ m/(\..+)$/;
         my $ext = $1;
-            use File::Copy;
             if (!$target{$ext} || $target{$ext} eq ".") {
                 $target{$ext} = $home.'/';
             }
-            move("$pwd/$file", $target{$ext} . $file) or die "$pwd $file, $target{$ext} $file $!"; 
+            #system("mv $pwd/$file $target{$ext}$file"); 
             print "Installed " . $file . "\n";
             $i = 1;
             last;
