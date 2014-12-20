@@ -162,12 +162,11 @@ foreach (@files) {
     }
     my $v = `head -n 1 $filepath`;
     $v =~ s/^.*?\s+?((\d*\.*)*)$/$1/;
-    chomp($v); 
     if ($v eq "") {
-        open (F, $pwd . '/' . $file); 
+        open (F, "$pwd/$file"); 
         my @f = <F>;
         close (F);
-        open (F, ">".$file);
+        open (F, ">$pwd/$file");
         print F $comment . $gitV . "\n";
         print F join("", @f);
         close(F);
