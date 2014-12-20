@@ -39,7 +39,7 @@ perl idf.pl store <file relative to ~/>
 
 =cut
 
-my $home = `echo \$HOME`;
+my $home = `sh -c "echo ~\$(whoami)"`;
 my $pwd = `echo \$(pwd)`;
 chomp($home);
 chomp($pwd);
