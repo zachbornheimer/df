@@ -32,3 +32,5 @@ endif
 
 " w = save, w! = force-save, w!! = force sudo save
 cmap w!! w !sudo tee > /dev/null %
+
+source ~/.vim/plugins/autocorrect.vimplugin
