@@ -50,6 +50,7 @@ chomp($pwd);
 my %target;
 $target{'.lua'} = $home . '/.config/awesome/';
 $target{'.vim'} = $home . '/.vim/colors/';
+$target{'.vimplugin'} = $home . '/.vim/plugins/';
 $target{'.zsh_conf'} = $home . '/.zkbd/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
@@ -85,7 +86,7 @@ if ($#ARGV > 0) {
             open (F, ">" . $file);
             print F join("\n", @removeVersionNumber);
             close(F);
-            system("git add .; git commit -a");
+            system("git commit $file");
         }
     }
     exit;
