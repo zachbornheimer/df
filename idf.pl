@@ -137,6 +137,7 @@ chdir($target);
 my %commentSymbols = ();
 $commentSymbols{'vimrc'} = '"';
 $commentSymbols{'vim'} = '"';
+$commentSymbols{'vimplugin'} = '"';
 $commentSymbols{'def'} = '#';
 $commentSymbols{'lua'} = '--';
 
