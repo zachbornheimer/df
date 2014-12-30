@@ -102,7 +102,7 @@ my $target = "$home/";
 
 my @files = ();
 foreach (<.*>) {
-    if (!($_ =~ /\.git/) && !($_ =~ /\.swp$/) && ($_ ne '.') && ($_ ne '..')) {
+    if (!($_ =~ /\.git/) && !($_ =~ /\.swp$/) && ($_ ne '.') && ($_ ne '..') && ($_ ne '.DS_Store')) {
         push @files, $_;
     }
 }
