@@ -34,3 +34,6 @@ endif
 cmap w!! w !sudo tee > /dev/null %
 
 source ~/.vim/plugins/autocorrect.vimplugin
+
+" Git commit modifications
+autocmd Filetype gitcommit setlocal spell textwidth=72
