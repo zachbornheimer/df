@@ -33,7 +33,9 @@ endif
 " w = save, w! = force-save, w!! = force sudo save
 cmap w!! w !sudo tee > /dev/null %
 
-source ~/.vim/plugins/autocorrect.vimplugin
+" POD file settings
+autocmd Filetype pod source ~/.vim/plugins/autocorrect.vimplugin
+autocmd Filetype pod setlocal spell textwidth=79
 
 " Git commit modifications
 autocmd Filetype gitcommit setlocal spell textwidth=72
