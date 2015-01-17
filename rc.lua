@@ -83,7 +83,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, "2. Web Coding", 3, 4, 5, 6, 7, 8, 9 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, "2. Web Coding", "3. Mutt", 4, 5, 6, 7, 8, 9 }, s, layouts[2])
 end
 -- }}}
 
@@ -100,6 +100,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal },
                                     { "open firefox", "firefox" },
                                     { "open libreoffice", "libreoffice" },
+                                    { "open mutt", "rxvt -e sudo mutt" },
                                   }
                         })
 
@@ -365,6 +366,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][2] } },
     { rule = { instance = "xterm" },
       properties = { tag = tags[1][2] } },
+    { rule = { instance = "rxvt" },
+      properties = { tag = tags[1][3] } },
 }
 -- }}}
 
