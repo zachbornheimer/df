@@ -97,7 +97,9 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+                                    { "open firefox", "firefox" },
+                                    { "open libreoffice", "libreoffice" },
                                   }
                         })
 
@@ -105,7 +107,12 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
+firefox = "firefox"
+libreoffice = "libreoffice"
+
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.utils.firefox = firefox -- Set the firefox for applications that require it
+menubar.utils.libreoffice = libreoffice -- Set the libreoffice for applications that require it
 -- }}}
 
 -- {{{ Wibox
