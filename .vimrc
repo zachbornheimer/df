@@ -39,3 +39,7 @@ autocmd Filetype pod setlocal spell textwidth=79
 
 " Git commit modifications
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+"Set F2 in visual mode to sort words as opposed to lines...it will join the
+"line if it's multiline
+vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
