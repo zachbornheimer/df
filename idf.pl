@@ -54,9 +54,14 @@ $target{'.vimplugin'} = $home . '/.vim/plugins/';
 $target{'.zsh_conf'} = $home . '/.zkbd/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
+my @vimPlugins = qw/ ctrlp surround fugitive speeddating toggle-bool/;
 
 foreach (@vimFiles) {
     $target{$_} = $home . '/.vim/colors/';
+}
+
+foreach (@vimPlugins) {
+    install_latest_vim_plugin($_);
 }
 
 foreach (keys %target) {
@@ -196,3 +201,21 @@ foreach (@files) {
         }
     }
 }
+
+sub install_latest_vim_plugin {
+    my $plugin = shift;
+    my %programs;
+    @{$programs{'ctrlp'}} = ('https://github.com/ctrlpvim/ctrlp.vim.git', 'ctrlp.vim');
+    @{$programs{'surround'}} = ('https://github.com/tpope/vim-surround.git', 'surround.vim');
+    @{$programs{'fugitive'}} = ('https://github.com/tpope/vim-fugitive', 'fugative.vim');
+    @{$programs{'speeddating'}} = ('https://github.com/tpope/vim-speeddating', 'speeddating.vim');
+    @{$programs{'toggle-bool'}} = ('https://github.com/sagarrakshe/toggle-bool', 'toggle-bool');
+
+    if ($programs{$plugin} > 0) {
+        print "Installing vim plugin $plugin\n";
+        system("git clone $programs{$plugin}[0] ~/.vim/bundle/$programs{$plugin}[1]");
+    } else {
+        print "Plugin $plugin not identified\n";
+    }
+}
+
