@@ -212,8 +212,13 @@ sub install_latest_vim_plugin {
     @{$programs{'toggle-bool'}} = ('https://github.com/sagarrakshe/toggle-bool', 'toggle-bool');
 
     if ($programs{$plugin} > 0) {
-        print "Installing vim plugin $plugin\n";
-        system("git clone $programs{$plugin}[0] ~/.vim/bundle/$programs{$plugin}[1]");
+        if (-d "$ENV{HOME}/.vim/bundle/$programs{$plugin}[1]") {
+            print "Updating vim plugin $plugin using git repo\n";
+            system("git -C ~/.vim/bundle/$programs{$plugin}[1] pull");
+        } else {
+            print "Installing vim plugin $plugin\n";
+            system("git clone $programs{$plugin}[0] ~/.vim/bundle/$programs{$plugin}[1]");
+        }
     } else {
         print "Plugin $plugin not identified\n";
     }
