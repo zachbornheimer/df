@@ -46,3 +46,10 @@ vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
 
 set runtimepath^=~/.vim/bundle/*
 
+let mapleader = ","
+"during insert, kj escapes, `^ is so that the cursor doesn't move
+inoremap kj <Esc>`^
+"during insert, lkj escapes and saves
+inoremap lkj <Esc>`^:w<CR>
+"during insert, lkj escapes and saves and QUITS
+inoremap kj<Space> <Esc>`^:w<CR><Esc><C-Z>
