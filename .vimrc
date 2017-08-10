@@ -50,6 +50,6 @@ let mapleader = ","
 "during insert, kj escapes, `^ is so that the cursor doesn't move
 inoremap kj <Esc>`^
 "during insert, lkj escapes and saves
-inoremap lkj <Esc>`^:w<CR>
+inoremap lkj <Esc>`^:w<CR>i
 "during insert, lkj escapes and saves and QUITS
 inoremap kj<Space> <Esc>`^:w<CR><Esc><C-Z>
