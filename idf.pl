@@ -209,7 +209,7 @@ sub install_latest_vim_plugin {
     @{$programs{'surround'}} = ('https://github.com/tpope/vim-surround.git', 'surround.vim');
     @{$programs{'fugitive'}} = ('https://github.com/tpope/vim-fugitive', 'fugative.vim');
     @{$programs{'speeddating'}} = ('https://github.com/tpope/vim-speeddating', 'speeddating.vim');
-    @{$programs{'toggle-bool'}} = ('https://github.com/sagarrakshe/toggle-bool', 'toggle-bool');
+    @{$programs{'toggle-bool'}} = ('https://github.com/zysys/toggle-bool', 'toggle-bool');
 
     if ($programs{$plugin} > 0) {
         if (-d "$ENV{HOME}/.vim/bundle/$programs{$plugin}[1]") {
