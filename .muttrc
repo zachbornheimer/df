@@ -1,3 +1,4 @@
+# 0.9.7
 # A basic .muttrc for use with Gmail
 
 # Change the following six lines to match your Gmail account details
@@ -48,3 +49,27 @@ set signature="~/.signature"
 #macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 #macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
 #macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+
+
+# Ignore all headers
+ignore *
+
+# Then un-ignore the ones I want to see
+unignore From:
+unignore To:
+unignore Reply-To:
+unignore Mail-Followup-To:
+unignore Subject:
+unignore Date:
+unignore Organization:
+unignore Newsgroups:
+unignore CC:
+unignore BCC:
+unignore X-Mailer:
+unignore User-Agent:
+unignore X-Junked-Because:
+unignore X-SpamProbe:
+unignore X-Virus-hagbard:
+
+# Now order the visable header lines
+hdr_order From: Subject: To: CC: BCC: Reply-To: Mail-Followup-To: Date: Organization: User-Agent: X-Mailer:
