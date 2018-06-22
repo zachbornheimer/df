@@ -54,5 +54,12 @@ let mapleader = ","
 inoremap kj <Esc>`^
 "during insert, lkj escapes and saves
 inoremap lkj <Esc>`^:w<CR>i
-"during insert, lkj escapes and saves and QUITS
+"during insert, kj<space> causes save and Ctrl-Z stop
 inoremap kj<Space> <Esc>`^:w<CR><Esc><C-Z>
+
+" sideways.vim settings ...note, these are based on the recommended defaults
+nnoremap <leader>h :SidewaysLeft<cr>
+nnoremap <leader>l :SidewaysRight<cr>
+
+" togglebool.vim settings ...note, this is the recommended default
+noremap <leader>r :ToggleBool<CR>
