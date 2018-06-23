@@ -33,9 +33,12 @@ endif
 " w = save, w! = force-save, w!! = force sudo save
 cmap w!! w !sudo tee > /dev/null %
 
-" POD file settings
-autocmd Filetype pod source ~/.vim/plugins/autocorrect.vimplugin
-autocmd Filetype pod setlocal spell textwidth=79
+" POD, TXT, and Documentation file settings
+autocmd Filetype pod,text,markdown source ~/.vim/plugins/autocorrect.vimplugin
+autocmd Filetype pod,text,markdown setlocal spell textwidth=79
+
+" Set Markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " Git commit modifications
 autocmd Filetype gitcommit setlocal spell textwidth=72
@@ -51,5 +54,12 @@ let mapleader = ","
 inoremap kj <Esc>`^
 "during insert, lkj escapes and saves
 inoremap lkj <Esc>`^:w<CR>i
-"during insert, lkj escapes and saves and QUITS
+"during insert, kj<space> causes save and Ctrl-Z stop
 inoremap kj<Space> <Esc>`^:w<CR><Esc><C-Z>
+
+" sideways.vim settings ...note, these are based on the recommended defaults
+nnoremap <leader>h :SidewaysLeft<cr>
+nnoremap <leader>l :SidewaysRight<cr>
+
+" togglebool.vim settings ...note, this is the recommended default
+noremap <leader>r :ToggleBool<CR>
