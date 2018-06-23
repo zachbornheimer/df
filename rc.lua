@@ -86,7 +86,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, "2. Web Coding", "3. Mutt", 4, 5, 6, 7, 8, 9 }, s, layouts[2])
+    tags[s] = awful.tag({ 1, "2. Web Coding", 3, "4. Mutt", 5, 6, 7, 8, 9 }, s, layouts[2])
 end
 -- }}}
 
@@ -102,7 +102,7 @@ myawesomemenu = {
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "open terminal", terminal },
                                     { "open opera", opera },
-                                    { "open libreoffice", "libreoffice" },
+                             --       { "open libreoffice", "libreoffice" },
                                     { "open mutt", mutt },
                                   }
                         })
@@ -374,13 +374,12 @@ awful.rules.rules = {
       { rule = { class = "Terminator" },
       properties = { }, callback = function (c)
           if not skipMovingMutt then
-              awful.client.movetotag(tags[1][3], c)
+              awful.client.movetotag(tags[1][4], c)
               skipMovingMutt = true
           elseif skipMovingMutt and not skipMovingTerminator then
               awful.client.movetotag(tags[1][2], c)
               skipMovingTerminator = true
           end
-
       end },
 
 
@@ -486,8 +485,8 @@ function run_once(prg,arg_string,pname,screen)
     end
 end
 
--- Mutt Launch must be first
+-- Mutt Launch must be first immediately followed by terminal
 run_once(mutt);
+run_once(terminal)
 
 run_once(opera)
-run_once(terminal)
