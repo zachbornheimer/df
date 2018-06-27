@@ -63,3 +63,5 @@ nnoremap <leader>l :SidewaysRight<cr>
 
 " togglebool.vim settings ...note, this is the recommended default
 noremap <leader>r :ToggleBool<CR>
+" I tend to assume it's this one though...
+noremap <leader>! :ToggleBool<CR>
