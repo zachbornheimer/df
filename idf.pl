@@ -54,7 +54,7 @@ $target{'.vimplugin'} = $home . '/.vim/plugins/';
 $target{'.zsh_conf'} = $home . '/.zkbd/';
 
 my @vimFiles = qw/ Tomorrow-Night.vim Tomorrow-Night-Bright.vim /;
-my @vimPlugins = qw/ ctrlp surround fugitive speeddating toggle-bool sideways /;
+my @vimPlugins = qw/ ctrlp surround fugitive speeddating toggle-bool sideways vim-schlepp/;
 
 foreach (@vimFiles) {
     $target{$_} = $home . '/.vim/colors/';
@@ -211,6 +211,7 @@ sub install_latest_vim_plugin {
     @{$programs{'speeddating'}} = ('https://github.com/tpope/vim-speeddating', 'speeddating.vim');
     @{$programs{'sideways'}} = ('https://github.com/AndrewRadev/sideways.vim', 'sideways');
     @{$programs{'toggle-bool'}} = ('https://github.com/zysys/toggle-bool', 'toggle-bool');
+    @{$programs{'vim-schlepp'}} = ('https://github.com/zirrostig/vim-schlepp', 'vim-schlepp');
 
     if ($programs{$plugin} > 0) {
         if (-d "$ENV{HOME}/.vim/bundle/$programs{$plugin}[1]") {
